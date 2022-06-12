@@ -12,10 +12,12 @@ app = Flask(__name__)
 CORS(app)
 app.config['JSON_AS_ASCII'] = False
 
-overall_stats = pd.read_csv('Data_train.csv', header=None)
+overall_stats = pd.read_csv('data_demo5.csv', header=None)
 
 column_names1 = ['user id', 'product id', 'rating', 'timestamp']
-dataset = pd.read_csv('Data_train.csv', sep=',', header=None, names=column_names1)
+
+dataset = pd.read_csv('data_demo5.csv', sep=',', header=None, names=column_names1)
+
 refined_dataset = dataset.groupby(by=['user id', 'product id'], as_index=False).agg({"rating": "mean"})
 
 num_users = len(refined_dataset['user id'].value_counts())
