@@ -52,7 +52,7 @@ movies_list = user_to_movie_df.columns
 
 
 def get_similar_users(user):
-    ## input to this function is the user and number of top similar users you want.
+    # input to this function is the user and number of top similar users you want.
 
     knn_input = np.asarray([user_to_movie_df.values[user - 1]])  # .reshape(1,-1)
     # knn_input = user_to_movie_df.iloc[0,:].values.reshape(1,-1)
@@ -95,17 +95,19 @@ def test(user_id, n):
         if count == n:
             break
     if count == 0:
-        print(
-            "There are no movies left which are not seen by the input users and seen by similar users. May be increasing the number of similar users who are to be considered may give a chance of suggesting an unseen good movie.")
         return []
     else:
-        print(final_movie_list)
         return final_movie_list
+
+
+@app.route('/rcm')
+def recommend_movie():
+    return "XIN CHAO NHE"
 
 
 @app.route('/rcm/<int:user>')
 def recommend_movies(user):
-    return jsonify(test(user, 9))
+    return jsonify(test(user, 10))
 
 
 if __name__ == '__main__':
